@@ -57,6 +57,9 @@ defmodule ClickhouseEcto.Storage do
   end
 
   defp run_query(sql, opts) do
+    {:ok, _} = Application.ensure_all_started(:ecto_sql)
+    {:ok, _} = Application.ensure_all_started(:clickhousex)
+
     opts =
       opts
       |> Keyword.drop([:name, :log, :pool, :pool_size])
